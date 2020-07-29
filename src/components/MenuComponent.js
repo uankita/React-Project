@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {  Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle  } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
+//import Dishdetail from './DishdetailComponent'
+import DishdetailComponent from './DishdetailComponent';
 
 class Menu extends Component {
 
@@ -9,62 +11,36 @@ class Menu extends Component {
         this.state = {
             selectedDish: null
         }
-        console.log('Menu Component constructor is invoke');
-    }
-    componentDidMount(){
-        console.log('Menu Component componentDidMount is invoke');
     }
 
-    onDishSelect(dish) {
-        this.setState({ selectedDish: dish});
-    }
-
-    renderDish(dish) {
-        if (dish != null)
-            return(
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.name}</CardTitle>
-                      <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-            );
-        else
-            return(
-                <div></div>
-            );
+    onSelectedDish(dish) {
+        this.setState({
+            selectedDish: dish
+        })
     }
 
     render() {
-        const menu = this.props.dishes.map((dish) => {
+        const menu = this.props.dishes.map(dish => {
             return (
-              <div  className="col-12 col-md-5 m-1">
-                <Card key={dish.id}
-                  onClick={() => this.onDishSelect(dish)}>
-                  <CardImg width="100%" src={dish.image} alt={dish.name} />
-                  <CardImgOverlay>
-                      <CardTitle>{dish.name}</CardTitle>
-                  </CardImgOverlay>
-                </Card>
-              </div>
+                <div key={dish.id} className='col-12 col-md-5 m-1'>
+                    <Card onClick={() => this.onSelectedDish(dish)} >
+                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImgOverlay>
+                            <CardTitle >{dish.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Card>
+                </div>
             );
         });
-        console.log('Menu Component render is invoke');
-
         return (
-            <div className="container">
-                <div className="row">
+            <div className='container'>
+                <div className='row'>
                     {menu}
                 </div>
-                <div className="row">
-                  <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.state.selectedDish)}
-                  </div>
-                </div>
+                <DishdetailComponent dish={this.state.selectedDish}></DishdetailComponent>
             </div>
         );
     }
 }
 
-export default Menu;
+export default Menu; 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 
-class Dishdetail extends Component {
+class DishdetailComponent extends Component {
 
     renderComments(comments) {
         if (comments == null) {
@@ -68,4 +68,4 @@ class Dishdetail extends Component {
     }
 }
 
-export default Dishdetail
+export default DishdetailComponent
